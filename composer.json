@@ -1,6 +1,6 @@
 {
-    "name": "armetiz/airtable-php",
-    "description": "Manipulate Airtable API using PHP",
+    "name": "yeswedev/airtable-php",
+    "description": "Manipulate Airtable API using PHP (fork from armetiz)",
     "keywords": ["php", "airtable", "sdk"],
     "homepage": "https://github.com/armetiz/airtable-php",
     "require": {
