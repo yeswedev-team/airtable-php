@@ -191,7 +191,7 @@ class Airtable
      * 
      * @return Record[]
      */
-    public function findRecords(string $table, array $criteria): array
+    public function findRecords(string $table, array $criteria = []): array
     {
         $url = $this->getEndpoint($table);
 
