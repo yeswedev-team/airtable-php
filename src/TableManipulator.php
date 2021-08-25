@@ -14,9 +14,9 @@ class TableManipulator
     }
 
 
-    public function createRecord(array $fields): void
+    public function createRecord(array $fields): ?Record
     {
-        $this->client->createRecord($this->table, $fields);
+        return $this->client->createRecord($this->table, $fields);
     }
 
     public function setRecord(array $criteria, array $fields): void
@@ -24,9 +24,9 @@ class TableManipulator
         $this->client->setRecord($this->table, $criteria, $fields);
     }
 
-    public function updateRecord(array $criteria, array $fields): void
+    public function updateRecord(array $criteria, array $fields): ?Record
     {
-        $this->client->updateRecord($this->table, $criteria, $fields);
+        return $this->client->updateRecord($this->table, $criteria, $fields);
     }
 
     public function containsRecord(array $criteria = []): bool

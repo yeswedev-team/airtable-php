@@ -37,7 +37,7 @@ class Airtable
         return new TableManipulator($this, $table);
     }
 
-    public function createRecord(string $table, array $fields): void
+    public function createRecord(string $table, array $fields): ?Record
     {
         /** @var Response $response */
         $response = $this->browser->post(
@@ -51,6 +51,8 @@ class Airtable
         );
 
         $this->guardResponse($table, $response);
+
+        return $this->instanciateRecordFromResponse($response);
     }
 
     /**
@@ -91,7 +93,7 @@ class Airtable
      *
      * @throws \Assert\AssertionFailedException
      */
-    public function updateRecord(string $table, array $criteria, array $fields): void
+    public function updateRecord(string $table, array $criteria, array $fields): ?Record
     {
         $record = $this->findRecord($table, $criteria);
 
@@ -109,6 +111,8 @@ class Airtable
         );
 
         $this->guardResponse($table, $response);
+
+        return $this->instanciateRecordFromResponse($response);
     }
 
     public function containsRecord(string $table, array $criteria): bool
@@ -266,5 +270,17 @@ class Airtable
                 )
             );
         }
+    }
+
+    protected function instanciateRecordFromResponse(Response $response): ?Record
+    {
+        $record = null;
+
+        $content = json_decode($response->getContent(), true);
+        if ($content) {
+            $record = new Record($content['id'], $content['fields']);
+        }
+
+        return $record;
     }
 }
